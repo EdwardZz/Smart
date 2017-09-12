@@ -10,7 +10,7 @@ import android.view.MenuItem;
 *  文件名：BaseActivity
 *  创建者：朱勇杰
 *  创建时间：2017/9/11
-*  描述：  
+*  描述：  BaseActivity
 */
 public class BaseActivity extends AppCompatActivity {
 
@@ -19,7 +19,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //显示返回键
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     //菜单栏操作
 

@@ -1,21 +1,26 @@
 package com.example.acer.smart;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 
 import com.example.acer.smart.fragment.ButlerFragment;
 import com.example.acer.smart.fragment.GirlFragment;
 import com.example.acer.smart.fragment.UserFragment;
 import com.example.acer.smart.fragment.WechatFragment;
+import com.example.acer.smart.ui.SettingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     //TabLayout
     private TabLayout mTabLayout;
@@ -25,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private List<String> mTitle;
     //Fragment
     private List<Fragment> mFragment;
+    //悬浮圈设置
+    private FloatingActionButton fab_setting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +65,37 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         mTabLayout = (TabLayout) findViewById(R.id.mTabLayout);
         mViewPager = (ViewPager) findViewById(R.id.mViewPager);
-
+        fab_setting = (FloatingActionButton) findViewById(R.id.fab_setting);
+        fab_setting.setOnClickListener(this);
+        //默认隐藏
+        fab_setting.setVisibility(View.GONE);
         //预加载
         mViewPager.setOffscreenPageLimit(mFragment.size());
+        //设置mViewPager滑动监听器
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Log.i("TAG", "position" + position);
+                if(position==0)
+                {
+                    fab_setting.setVisibility(View.GONE);
+                }
+                else{
+                    fab_setting.setVisibility(View.VISIBLE);
+                }
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         //设置适配器
         mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             //选中的item
@@ -86,5 +121,16 @@ public class MainActivity extends AppCompatActivity {
         //绑定
         mTabLayout.setupWithViewPager(mViewPager);
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.fab_setting:
+                Log.d("TAG", "测试2");
+                startActivity(new Intent(this, SettingActivity.class));
+                Log.d("TAG", "测试1");
+                break;
+        }
     }
 }
