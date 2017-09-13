@@ -10,5 +10,9 @@ package com.example.acer.smart.utils;
 */
 public class StaticClass {
 
+    //闪屏页延时
+    public static final int HANDLER_SPLASH = 1001;
+    //判断是否第一次进入程序
+    public  static final String SHARE_IS_FIRST="isFirst";
 }
 

@@ -81,11 +81,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onPageSelected(int position) {
                 Log.i("TAG", "position" + position);
-                if(position==0)
-                {
+                if (position == 0) {
                     fab_setting.setVisibility(View.GONE);
-                }
-                else{
+                } else {
                     fab_setting.setVisibility(View.VISIBLE);
                 }
 
@@ -127,9 +125,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fab_setting:
-                Log.d("TAG", "测试2");
+
                 startActivity(new Intent(this, SettingActivity.class));
-                Log.d("TAG", "测试1");
+
                 break;
         }
     }

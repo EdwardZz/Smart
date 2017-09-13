@@ -1,7 +1,6 @@
 package com.example.acer.smart.ui;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.acer.smart.R;
 
@@ -17,7 +16,6 @@ public class SettingActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("TAG","测试3");
         setContentView(R.layout.activity_setting);
     }
 }
