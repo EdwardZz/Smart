@@ -62,11 +62,12 @@ public class SplashActivity extends AppCompatActivity {
 
     private void initView() {
 
-        //延时2000ms
-        handler.sendEmptyMessageDelayed(StaticClass.HANDLER_SPLASH, 2000);
+
         tv_splash = (TextView) findViewById(R.id.tv_splash);
         //设置字体
         UtilTools.setFont(this, tv_splash);
+        //延时2000ms
+        handler.sendEmptyMessageDelayed(StaticClass.HANDLER_SPLASH, 2000);
     }
 
     //判断程序是否第一次运行
