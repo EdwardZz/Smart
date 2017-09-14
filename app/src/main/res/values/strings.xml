@@ -3,4 +3,6 @@
     <string name="text_setting">设置</string>
     <string name="text_activity_guide">引导页</string>
     <string name="text_guide">进入主页</string>
+    <string name="text_login">登陆</string>
+    <string name="text_register">注册</string>
 </resources>

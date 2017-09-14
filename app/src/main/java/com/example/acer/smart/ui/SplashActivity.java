@@ -7,7 +7,6 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.example.acer.smart.MainActivity;
 import com.example.acer.smart.R;
 import com.example.acer.smart.utils.L;
 import com.example.acer.smart.utils.ShareUtils;
@@ -43,7 +42,7 @@ public class SplashActivity extends AppCompatActivity {
                         startActivity(new Intent(SplashActivity.this, GuideActivity.class));
                     } else {
                         L.i("测试3");
-                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        startActivity(new Intent(SplashActivity.this, GuideActivity.class));
                     }
                     finish();
                     break;

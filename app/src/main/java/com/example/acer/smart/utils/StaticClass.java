@@ -14,5 +14,9 @@ public class StaticClass {
     public static final int HANDLER_SPLASH = 1001;
     //判断是否第一次进入程序
     public  static final String SHARE_IS_FIRST="isFirst";
+    //Bugly ID
+    public  static final String BUGLY_APP_ID="cf70ea0a9b";
+    //Bmob ID
+    public  static final String BMOB_APP_ID="e02f5b5d65b633b5d12269983587f799";
 }
 

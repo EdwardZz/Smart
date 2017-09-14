@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initData();
         initView();
 
+        //Bugly测试
+        //CrashReport.testJavaCrash();
+
     }
 
     //初始化数据
