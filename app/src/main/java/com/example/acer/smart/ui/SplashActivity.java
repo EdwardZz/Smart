@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.example.acer.smart.R;
-import com.example.acer.smart.utils.L;
 import com.example.acer.smart.utils.ShareUtils;
 import com.example.acer.smart.utils.StaticClass;
 import com.example.acer.smart.utils.UtilTools;
@@ -38,10 +37,10 @@ public class SplashActivity extends AppCompatActivity {
                 case StaticClass.HANDLER_SPLASH:
                     //判断程序是否第一次运行
                     if (isFirst()) {
-                        L.i("测试2");
+
                         startActivity(new Intent(SplashActivity.this, GuideActivity.class));
                     } else {
-                        L.i("测试3");
+
                         startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                     }
                     finish();
@@ -55,7 +54,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        L.i("测试1");
+
         initView();
     }
 

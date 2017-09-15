@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
 
 import com.example.acer.smart.R;
@@ -55,7 +54,23 @@ public class RegisteredActivity extends BaseActivity implements View.OnClickList
         et_email = (EditText) findViewById(R.id.et_email);
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(this);
-        mRadioGroup= (RadioGroup) findViewById(R.id.mRadioGroup);
+        mRadioGroup = (RadioGroup) findViewById(R.id.mRadioGroup);
+
+        //判断性别
+
+
+        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                if (i == R.id.rb_boy) {
+                    isGender = true;
+                } else if (i == R.id.rb_girl) {
+                    isGender = false;
+
+                }
+                L.i("性别1" + isGender);
+            }
+        });
 
 
     }
@@ -73,27 +88,17 @@ public class RegisteredActivity extends BaseActivity implements View.OnClickList
                 String password = et_password.getText().toString().trim();
                 String desc = et_desc.getText().toString().trim();
                 String email = et_email.getText().toString().trim();
+
                 //判断是否为空
-                //判断两次输入是否一致
-                if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(age) &&
-                        !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(email))
+
+                if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(age) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(email))
+
+                {
+
+
+                    //判断两次输入是否一致
                     if (pass.equals(password)) {
-                        //判断性别
 
-
-                        L.i("性别2" + isGender);
-                        mRadioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-                            @Override
-                            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-                                if (i == R.id.rb_boy) {
-                                    isGender = true;
-                                } else if (i == R.id.rb_girl) {
-                                    isGender = false;
-
-                                }
-                                L.i("性别1" + isGender);
-                            }
-                        });
 
 
                         //判断简介是否为空
@@ -101,7 +106,7 @@ public class RegisteredActivity extends BaseActivity implements View.OnClickList
                             desc = "这个人很懒，什么都没留下......";
                         }
                         //注册
-                        L.i("测试001");
+
                         MyUser user = new MyUser();
                         user.setUsername(name);
                         user.setDesc(desc);
@@ -109,8 +114,7 @@ public class RegisteredActivity extends BaseActivity implements View.OnClickList
                         user.setPassword(pass);
                         user.setEmail(email);
                         user.setSex(isGender);
-                        L.i("性别" + isGender);
-                        L.i("测试002");
+
                         user.signUp(new SaveListener<MyUser>() {
                             @Override
                             public void done(MyUser myUser, BmobException e) {
@@ -130,7 +134,7 @@ public class RegisteredActivity extends BaseActivity implements View.OnClickList
                     } else {
 
                         Toast.makeText(this, "两次输入密码不一致，请重新输入", Toast.LENGTH_SHORT).show();
-                    }
+                    }}
                 else {
                     Toast.makeText(this, "输入框为空", Toast.LENGTH_SHORT).show();
                 }
