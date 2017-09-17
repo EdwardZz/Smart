@@ -7,9 +7,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
-import com.example.acer.smart.MainActivity;
 import com.example.acer.smart.R;
 
 import java.util.ArrayList;
@@ -35,6 +35,7 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
     private ImageView point1, point2, point3;
     //跳过
     private ImageView iv_back;
+    private Button btn_start;
 
 
     @Override
@@ -47,6 +48,7 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
 
     private void initView() {
 
+        btn_start= (Button) findViewById(R.id.byn_start);
         //初始化View
         mViewpager = (ViewPager) findViewById(R.id.mViewPager);
 
@@ -113,9 +115,13 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
 
         switch (view.getId()) {
 
+
             case R.id.byn_start:
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
+                break;
             case R.id.iv_back:
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, LoginActivity.class));
                 finish();
                 break;
         }
