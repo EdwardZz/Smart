@@ -40,4 +40,6 @@ dependencies {
     compile 'com.tencent.bugly:nativecrashreport:latest.release'
     //Bmob
     compile 'cn.bmob.android:bmob-sdk:3.5.5'
+    //CircleImageView
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 }

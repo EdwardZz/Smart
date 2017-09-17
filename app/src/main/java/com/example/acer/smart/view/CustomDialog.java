@@ -33,8 +33,8 @@ public class CustomDialog extends Dialog{
         setContentView(layout);
         Window window=getWindow();
         WindowManager.LayoutParams layoutParams=window.getAttributes();
-        layoutParams.width=width;
-        layoutParams.height=height;
+        layoutParams.width=WindowManager.LayoutParams.MATCH_PARENT;
+        layoutParams.height=WindowManager.LayoutParams.WRAP_CONTENT;
         layoutParams.gravity=gravity;
         window.setAttributes(layoutParams);
         window.setWindowAnimations(anim);

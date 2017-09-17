@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -43,6 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private CustomDialog customdialog;
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -59,13 +61,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(this);
         keep_password = (CheckBox) findViewById(R.id.keep_password);
-        tv_forget= (TextView) findViewById(R.id.tv_forget);
+        tv_forget = (TextView) findViewById(R.id.tv_forget);
         tv_forget.setOnClickListener(this);
 
-        //customdialog=new CustomDialog(this,100,100,R.layout.diaolog_loding,R.style.Theme_dialog, Gravity.CENTER);
+
+
+        customdialog = new CustomDialog(this, 100, 100, R.layout.diaolog_loding, R.style.Theme_dialog, Gravity.CENTER, R.style.pop_anim_style);
 
         //屏幕外点击无效
-        //customdialog.setCancelable(false);
+        customdialog.setCancelable(false);
 
 
         //设置选中状态
@@ -77,6 +81,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             et_password.setText(ShareUtils.getString(this, "password", ""));
 
         }
+
+
 
 
     }
@@ -96,7 +102,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 //判断是否为空
                 if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(password)) {
                     //登陆
-                    //customdialog.show();
+                    customdialog.show();
                     final MyUser user = new MyUser();
                     user.setUsername(name);
                     user.setPassword(password);
@@ -105,7 +111,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void done(MyUser myUser, BmobException e) {
                             //判断结果
-                            //customdialog.dismiss();
+                            customdialog.dismiss();
                             if (e == null) {
 
                                 //判断邮箱是否进行验证
@@ -129,7 +135,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.tv_forget:
 
-                startActivity(new Intent(this,ForgetPasswordActivity.class));
+                startActivity(new Intent(this, ForgetPasswordActivity.class));
 
                 break;
         }

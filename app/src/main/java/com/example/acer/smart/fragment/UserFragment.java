@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,12 @@ import com.example.acer.smart.R;
 import com.example.acer.smart.entity.MyUser;
 import com.example.acer.smart.ui.LoginActivity;
 import com.example.acer.smart.utils.L;
+import com.example.acer.smart.view.CustomDialog;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /*
 *  项目名：Smart
@@ -38,6 +41,17 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     private EditText edit_userage;
     private EditText edit_userdesc;
     private Button btn_ok;
+
+    private Button btn_camera;
+    private Button btn_picture;
+    private Button btn_cancel;
+
+
+    //圆形头像
+    private CircleImageView profile_image;
+    private CustomDialog dialog;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +73,10 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         btn_ok = view.findViewById(R.id.btn_ok);
         btn_ok.setOnClickListener(this);
 
+
+
+        profile_image=view.findViewById(R.id.profile_image);
+        profile_image.setOnClickListener(this);
         //默认是不可点击的/不可修改
 
         setEnabled(false);
@@ -70,6 +88,19 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         edit_usersex.setText(userInfo.isSex() ? "男" : "女");
         edit_userage.setText(userInfo.getAge());
         edit_userdesc.setText(userInfo.getDesc());
+
+        dialog=new CustomDialog(getActivity(),0,0,R.layout.dialog_photo,R.style.Theme_dialog, Gravity.BOTTOM,0);
+
+        //屏幕外点击无效
+        dialog.setCancelable(false);
+
+        btn_camera=dialog.findViewById(R.id.btn_camera);
+        btn_camera.setOnClickListener(this);
+        btn_picture=dialog.findViewById(R.id.btn_picture);
+        btn_picture.setOnClickListener(this);
+        btn_cancel=dialog.findViewById(R.id.btn_cancel);
+        btn_cancel.setOnClickListener(this);
+
 
 
     }
@@ -156,6 +187,32 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 }
 
                 break;
+            case R.id.profile_image:
+
+                dialog.show();
+
+                break;
+            case R.id.btn_camera:
+
+                toCamera();
+                break;
+            case R.id.btn_picture:
+
+                toPicture();
+                break;
+            case R.id.btn_cancel:
+                dialog.dismiss();
+                break;
         }
+
+    }
+
+    //跳转相机
+    private void toPicture() {
+
+    }
+    //跳转相册
+    private void toCamera() {
+
     }
 }
