@@ -1,7 +1,10 @@
 package com.example.acer.smart.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -18,6 +21,8 @@ import com.example.acer.smart.entity.MyUser;
 import com.example.acer.smart.ui.LoginActivity;
 import com.example.acer.smart.utils.L;
 import com.example.acer.smart.view.CustomDialog;
+
+import java.io.File;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
@@ -207,12 +212,79 @@ public class UserFragment extends Fragment implements View.OnClickListener {
 
     }
 
+    public static  final String PHOTO_IMAGE_FILE_NAME="fileImg.ipg";
+    public  static final int CAMERA_REQUEST_CODE=100;
+    public static final int IMAGE_REQUEST_CODE=101;
+    public static final int RESULT_REQUEST_CODE=102;
+    private File tempFile=null;
+
+
     //跳转相机
     private void toPicture() {
+
+        Intent intent=new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent,IMAGE_REQUEST_CODE);
+        dialog.dismiss();
+
 
     }
     //跳转相册
     private void toCamera() {
+        Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        //判断内存卡是否可用，可用的话就进行存储
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                Uri.fromFile(new File(Environment.getExternalStorageDirectory(),PHOTO_IMAGE_FILE_NAME
+                )));
+        startActivityForResult(intent,CAMERA_REQUEST_CODE);
+        dialog.dismiss();
+
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode!=getActivity().RESULT_CANCELED){
+            switch(requestCode){
+
+                //相册数据
+                case IMAGE_REQUEST_CODE:
+                  startPhotoZoom(data.getData());
+
+                    break;
+               //相机数据
+                case CAMERA_REQUEST_CODE:
+
+                    tempFile=new File(Environment.getExternalStorageDirectory(),PHOTO_IMAGE_FILE_NAME);
+                    startPhotoZoom(Uri.fromFile(tempFile));
+
+                    break;
+                case RESULT_REQUEST_CODE:
+
+
+                    break;
+            }
+        }
+    }
+    //裁剪
+    private void  startPhotoZoom(Uri uri){
+
+
+        if(uri==null){
+            L.i("uri==null");
+            return;
+        }
+        Intent intent=new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(uri,"image/*");
+        //设置裁剪
+        intent.putExtra("crop",true);
+        //裁剪宽高
+        intent.putExtra("aspectX",1);
+        intent.putExtra("aspectY",1);
+        //裁剪图片的质量
+        intent.putExtra("outputX",320);
+        intent.putExtra("outputY",320);
+        startActivityForResult(intent,RESULT_REQUEST_CODE);
 
     }
 }
