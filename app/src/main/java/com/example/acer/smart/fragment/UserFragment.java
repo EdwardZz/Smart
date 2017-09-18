@@ -1,6 +1,7 @@
 package com.example.acer.smart.fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,6 +21,7 @@ import com.example.acer.smart.R;
 import com.example.acer.smart.entity.MyUser;
 import com.example.acer.smart.ui.LoginActivity;
 import com.example.acer.smart.utils.L;
+import com.example.acer.smart.utils.UtilTools;
 import com.example.acer.smart.view.CustomDialog;
 
 import java.io.File;
@@ -93,6 +95,8 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         edit_usersex.setText(userInfo.isSex() ? "男" : "女");
         edit_userage.setText(userInfo.getAge());
         edit_userdesc.setText(userInfo.getDesc());
+
+        UtilTools.getImageToShare(getActivity(),profile_image);
 
         dialog=new CustomDialog(getActivity(),0,0,R.layout.dialog_photo,R.style.Theme_dialog, Gravity.BOTTOM,0);
 
@@ -261,6 +265,17 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                     break;
                 case RESULT_REQUEST_CODE:
 
+                    //有可能点击舍弃
+                    if(data!=null){
+
+                        //拿到图片设置
+                        setImageToView(data);
+                        //删除原图片
+                        if(tempFile!=null){
+                            tempFile.delete();
+                        }
+
+                    }
 
                     break;
             }
@@ -284,7 +299,27 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         //裁剪图片的质量
         intent.putExtra("outputX",320);
         intent.putExtra("outputY",320);
+        //发送数据
+        intent.putExtra("return-data",true);
         startActivityForResult(intent,RESULT_REQUEST_CODE);
 
+    }
+    private void setImageToView(Intent data){
+
+
+        //设置图片
+        Bundle bundle=data.getExtras();
+        if(bundle!=null){
+            Bitmap bitmap=bundle.getParcelable("data");
+            profile_image.setImageBitmap(bitmap);
+
+        }
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        UtilTools.putImageToShare(getActivity(),profile_image);
     }
 }
