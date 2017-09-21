@@ -20,7 +20,7 @@ import java.util.List;
 *  创建时间：2017/9/21
 *  描述：  快递查询adapter
 */
-public class CourierAdapter extends BaseAdapter{
+public class CourierAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<CourierData> mList;
@@ -28,60 +28,56 @@ public class CourierAdapter extends BaseAdapter{
     private LayoutInflater inflater;
     private CourierData data;
 
-
-    public  CourierAdapter(Context mContext,List<CourierData> mList){
-
-        this.mContext=mContext;
-        this.mList=mList;
-        inflater= (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
+    public CourierAdapter(Context mContext, List<CourierData> mList) {
+        this.mContext = mContext;
+        this.mList = mList;
+        //获取系统服务
+        inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
+
     @Override
     public int getCount() {
         return mList.size();
     }
 
     @Override
-    public Object getItem(int i) {
-        return mList.get(i);
+    public Object getItem(int position) {
+        return mList.get(position);
     }
 
     @Override
-    public long getItemId(int i) {
-        return i;
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-
-        ViewHolder viewholder=null;
-        if(view==null){
-
-            viewholder=new ViewHolder();
-            view = inflater.inflate(R.layout.layout_courier_item,null);
-            viewholder.tv_remark=view.findViewById(R.id.tv_remark);
-            viewholder.tv_zone=view.findViewById(R.id.tv_zone);
-            viewholder.tv_datatime=view.findViewById(R.id.tv_datetime);
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder = null;
+        //第一次加载
+        if(convertView == null){
+            viewHolder = new ViewHolder();
+            convertView = inflater.inflate(R.layout.layout_courier_item,null);
+            viewHolder.tv_remark = (TextView) convertView.findViewById(R.id.tv_remark);
+            viewHolder.tv_zone = (TextView) convertView.findViewById(R.id.tv_zone);
+            viewHolder.tv_datetime = (TextView) convertView.findViewById(R.id.tv_datetime);
             //设置缓存
-            view.setTag(viewholder);
+            convertView.setTag(viewHolder);
+        }else{
+            viewHolder = (ViewHolder) convertView.getTag();
         }
-        else{
 
-            viewholder= (ViewHolder) view.getTag();
-
-        }
         //设置数据
-        data=mList.get(i);
-        viewholder.tv_datatime.setText(data.getDatatime());
-        viewholder.tv_remark.setText(data.getRemark());
-        viewholder.tv_zone.setText(data.getZone());
-        return null;
-    }
-    class ViewHolder{
+        data = mList.get(position);
 
+        viewHolder.tv_remark.setText(data.getRemark());
+        viewHolder.tv_zone.setText(data.getZone());
+        viewHolder.tv_datetime.setText(data.getDatatime());
+        return convertView;
+    }
+
+    class ViewHolder{
         private TextView tv_remark;
         private TextView tv_zone;
-        private TextView tv_datatime;
+        private TextView tv_datetime;
     }
-
 }
