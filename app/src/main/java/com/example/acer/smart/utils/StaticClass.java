@@ -18,5 +18,8 @@ public class StaticClass {
     public  static final String BUGLY_APP_ID="cf70ea0a9b";
     //Bmob ID
     public  static final String BMOB_APP_ID="e02f5b5d65b633b5d12269983587f799";
+    //聚合数据ID
+    public static final String  COURIER_KEY="92b74442ceaa7fcee049a38178492848";
+
 }
 

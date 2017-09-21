@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.acer.smart.R;
 import com.example.acer.smart.entity.MyUser;
+import com.example.acer.smart.ui.CourierActivity;
 import com.example.acer.smart.ui.LoginActivity;
 import com.example.acer.smart.utils.L;
 import com.example.acer.smart.utils.UtilTools;
@@ -52,6 +53,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     private Button btn_camera;
     private Button btn_picture;
     private Button btn_cancel;
+    private TextView tv_courier;
 
 
     //圆形头像
@@ -79,6 +81,8 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         edit_userdesc = view.findViewById(R.id.edit_userdesc);
         btn_ok = view.findViewById(R.id.btn_ok);
         btn_ok.setOnClickListener(this);
+        tv_courier=view.findViewById(R.id.tv_courier);
+        tv_courier.setOnClickListener(this);
 
 
 
@@ -211,6 +215,9 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.btn_cancel:
                 dialog.dismiss();
+                break;
+            case R.id.tv_courier:
+                startActivity(new Intent(getActivity(),CourierActivity.class));
                 break;
         }
 
