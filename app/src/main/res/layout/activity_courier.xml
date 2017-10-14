@@ -16,7 +16,7 @@
         android:id="@+id/et_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="快递单号"/>
+        android:hint="快递单号" />
 
     <Button
         android:id="@+id/btn_get_courier"

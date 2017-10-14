@@ -75,7 +75,7 @@ public class CourierActivity extends BaseActivity implements View.OnClickListene
                  */
                 String name=et_name.getText().toString().trim();
                 String number=et_number.getText().toString().trim();
-                String url="http://v.juhe.cn/exp/index?key="+ StaticClass.COURIER_KEY+"&com="+name+"&no="+number;
+                String url="http://jisukdcx.market.alicloudapi.com"+ StaticClass.COURIER_KEY+"&com="+name+"&no="+number;
                 if(!TextUtils.isEmpty(name)&&!TextUtils.isEmpty(number))
                 {
                     RxVolley.get(url, new HttpCallback() {
