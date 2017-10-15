@@ -44,17 +44,19 @@ public class ChatAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return mList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return null;
+
+        return mList.get(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return 0;
+
+        return i;
     }
 
     @Override
@@ -80,18 +82,18 @@ public class ChatAdapter extends BaseAdapter {
 
             }
         } else {
-                switch (type){
-                    case VALUE_LEFT_TEXT:
-                        viewHolderLeft=(ViewHolderLeft) view.getTag();
-                        break;
-                    case VALUE_RIGHT_TEXT:
-                        viewHolderRight= (ViewHolderRight) view.getTag();
-                        break;
-                }
+            switch (type) {
+                case VALUE_LEFT_TEXT:
+                    viewHolderLeft = (ViewHolderLeft) view.getTag();
+                    break;
+                case VALUE_RIGHT_TEXT:
+                    viewHolderRight = (ViewHolderRight) view.getTag();
+                    break;
+            }
         }
         //赋值
-        ChatListData data=mList.get(i);
-        switch (type){
+        ChatListData data = mList.get(i);
+        switch (type) {
             case VALUE_LEFT_TEXT:
                 viewHolderLeft.tv_left_text.setText(data.getText());
                 break;
@@ -100,7 +102,7 @@ public class ChatAdapter extends BaseAdapter {
                 break;
         }
 
-        return null;
+        return view;
     }
 
     //根据数据源的posion来返回要显示的item

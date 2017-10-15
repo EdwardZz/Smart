@@ -19,7 +19,7 @@
         android:padding="20dp"
         android:text="左边"
         android:textColor="@android:color/white"
-        android:textSize="18sp"/>
+      />
 
 
 </LinearLayout>
