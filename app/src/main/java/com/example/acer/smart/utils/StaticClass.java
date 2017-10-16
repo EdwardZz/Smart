@@ -20,6 +20,8 @@ public class StaticClass {
     public  static final String BMOB_APP_ID="e02f5b5d65b633b5d12269983587f799";
     //聚合数据ID
     public static final String  COURIER_KEY="92b74442ceaa7fcee049a38178492848";
+    //问答机器人
+    public static final String CHAT_LIST_KEY="1ebe1a5538d04aa916e6b150eeb1fc4a";
 
 }
 
